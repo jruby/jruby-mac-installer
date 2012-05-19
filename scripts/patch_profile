@@ -59,7 +59,7 @@ patch_profile() {
 }
 
 try_patch_profile() {
-    check_previous_patch $PR
+    check_previous_patch "$PR"
     if [ $? -eq 0 ]
     then
         patch_profile

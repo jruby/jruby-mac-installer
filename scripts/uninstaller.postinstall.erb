@@ -9,7 +9,7 @@ JRUBY_CURRENT_PATH="$JRUBY_ROOT/Current"
 JRUBY_INSTALLER_LOG="$TMPDIR/jruby.uninstaller.log"
 JRUBY_INSTALLER_ERR="$TMPDIR/jruby.uninstaller.err"
 
-if [ ! -d $JRUBY_VERSION_PATH ]
+if [ ! -d "$JRUBY_VERSION_PATH" ]
 then
     echo "seems JRuby version $JRUBYVER is not installed in $JRUBY_VERSION_PATH"
     exit
@@ -18,9 +18,9 @@ fi
 #
 # creates a backup of the installed version
 #
-BACKUP="$TMPDIR/jruby_unistaller_backup_$(date +%s)" 
-mkdir $BACKUP
-cp -r $JRUBY_VERSION_PATH $BACKUP
+BACKUP="$TMPDIR/jruby_unistaller_backup_$(date +%s)"
+mkdir "$BACKUP"
+cp -r "$JRUBY_VERSION_PATH" "$BACKUP"
 
 #
 # gets the previously installed version
@@ -46,7 +46,7 @@ for (( last = ${#versions[@]} - 1 ; last > 0 ; last-- ))
  do
      for (( i = 0 ; i < last ; i++ ))
      do
-        IFS="." 
+        IFS="."
         declare -a e=(${versions[$i]})
         declare -a e1=(${versions[$((i+1))]})
         IFS=" "
@@ -73,7 +73,7 @@ do
     major_1=${version_1[0]}
     minor_1=${version_1[1]}
     patch_1=${version_1[2]}
- 
+
     major_2=${version_2[0]}
     minor_2=${version_2[1]}
     patch_2=${version_2[2]}
@@ -82,7 +82,7 @@ do
         [[ "$major_2" -eq "$major_1" && "$minor_2" -gt "$minor_1" ]] || \
         [[ "$major_2" -eq "$major_1" && "$minor_2" -eq "$minor_1" && "$patch_2" -gt "$patch_1" ]]
     then
-        previous_version=$version
+        previous_version="$version"
     fi
 done
 
@@ -96,7 +96,7 @@ rm "$JRUBY_CURRENT_PATH"
 if [ -d "$JRUBY_ROOT/$previous_version" ]
 then
 #
-# links to the prevously installed version 
+# links to the prevously installed version
 #
     ln -s "$JRUBY_ROOT/$previous_version" "$JRUBY_CURRENT_PATH"
 else
